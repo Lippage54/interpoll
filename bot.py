@@ -1,9 +1,10 @@
 from telegram import Update, Poll
 from telegram.ext import Updater, CommandHandler, CallbackContext
 import random
+import os
 
 # 🔧 Вставь сюда свой токен
-TELEGRAM_BOT_TOKEN = '8165287297:AAFAE_yaziiGctflBWowf0RSrrnLY-EI0Z0'
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 # 📋 Готовые опросы
 polls = [
@@ -45,4 +46,5 @@ def main():
     updater.idle()
 
 if __name__ == '__main__':
+
     main()
