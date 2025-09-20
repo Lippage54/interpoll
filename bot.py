@@ -6,6 +6,12 @@ import os
 # 🔧 Вставь сюда свой токен
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
+if not TELEGRAM_BOT_TOKEN:
+    raise ValueError("TELEGRAM_BOT_TOKEN переменная окружения не установлена!")
+
+# Или для отладки:
+print(f"Токен (обрезан): {TELEGRAM_BOT_TOKEN[:5]}...")  # не печатай весь токен в лог!
+
 # 📋 Готовые опросы
 polls = [
     {
@@ -48,3 +54,4 @@ def main():
 if __name__ == '__main__':
 
     main()
+
