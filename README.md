@@ -1,2 +1,0 @@
-# interpoll
-generate ready poll
