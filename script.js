@@ -3,7 +3,7 @@ let currentIndex = 0;
 let correct = 0;
 let wrong = 0;
 let selectedOption = null;
-const N = 20; // количество вопросов
+const N = 300; // количество вопросов
 
 async function loadQuiz() {
   const res = await fetch("quiz.json");
