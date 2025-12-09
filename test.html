@@ -162,9 +162,11 @@ h1 {
     border: 1px solid #ccc;
     cursor: pointer;
     transition: 0.2s;
-    background: #f5f5f5;
+    background: var(--bg); /* раньше было #f5f5f5 */
+    color: var(--text);
     font-size: 14px;
 }
+
 .tile.current { border-color: var(--accent); background: rgba(0,123,255,0.2); }
 .tile.correct { background: var(--correct); color: white; border-color: var(--correct); }
 .tile.wrong { background: var(--wrong); color: white; border-color: var(--wrong); }
@@ -211,58 +213,63 @@ h1 {
 
     <div class="count-popup" id="count-popup">
         <label>Вопросов:<br>
-            <input id="count" type="number" min="1" value="25">
+            <input id="count" type="number" min="1" value="0">
         </label>
     </div>
 </div>
 
 <script>
-// --- JS без изменений ---
-const urlParams = new URLSearchParams(window.location.search);
-const testId = urlParams.get('id');
-const questionCount = parseInt(urlParams.get('count')) || 25;
+const params = new URLSearchParams(window.location.search);
+const testId = params.get('id');
+let questionCount = parseInt(params.get('count')) || 10;
+
 const progressKey = `progress_${testId}`;
 const historyKey = `history_${testId}`;
-let testData = null;
-let questions = [];
-let currentIndex = 0;
-let userAnswers = [];
+let questions = [], userAnswers = [], currentIndex = 0, testData = null;
 
 fetch('tests.json')
-    .then(r => r.json())
-    .then(list => {
-        const item = list.find(t => t.id === testId);
-        if (!item) throw "Тест не найден";
-        return fetch(item.file);
-    })
-    .then(r => r.json())
-    .then(data => {
-        testData = data;
-        document.getElementById('title').textContent = data.title;
-        let savedProgress = JSON.parse(localStorage.getItem(progressKey));
-        if (savedProgress) {
-            questions = savedProgress.questions;
-            userAnswers = savedProgress.userAnswers;
-            currentIndex = savedProgress.currentIndex;
-        } else {
-            questions = pickRandom(data.questions, questionCount)
-                .sort(() => Math.random() - 0.5)
-                .map(q => {
-                    const order = q.answers.map((_, i) => i).sort(() => Math.random() - 0.5);
-                    const shuffledAnswers = order.map(i => q.answers[i]);
-                    const newCorrect = order.indexOf(q.correct);
-                    return { ...q, answers: shuffledAnswers, correct: newCorrect };
-                });
-            userAnswers = Array(questions.length).fill(null);
-        }
-        createTiles();
-        showQuestion(currentIndex);
-        updateTiles();
-        updateProgress();
-    })
-    .catch(err => alert(err));
+  .then(r => r.json())
+  .then(list => {
+    const item = list.find(t => t.id === testId);
+    if (!item) throw "Тест не найден";
+    return fetch(item.file);
+  })
+  .then(r => r.json())
+  .then(data => {
+    testData = data;
+    document.getElementById('title').textContent = data.title;
 
-function pickRandom(array, count) { return array.slice().sort(() => Math.random() - 0.5).slice(0,count); }
+    let savedProgress = JSON.parse(localStorage.getItem(progressKey));
+if (savedProgress && savedProgress.questions.length === questionCount) {
+  // восстанавливаем, если количество совпадает
+  questions = savedProgress.questions;
+  userAnswers = savedProgress.userAnswers;
+  currentIndex = savedProgress.currentIndex;
+} else {
+  // создаём новый тест
+  const selected = pickRandom(data.questions, questionCount);
+  questions = selected
+    .sort(() => Math.random() - 0.5)
+    .map(q => {
+      const order = q.answers.map((_, i) => i).sort(() => Math.random() - 0.5);
+      const shuffledAnswers = order.map(i => q.answers[i]);
+      const newCorrect = order.indexOf(q.correct);
+      return { ...q, answers: shuffledAnswers, correct: newCorrect };
+    });
+  userAnswers = Array(questions.length).fill(null);
+  localStorage.removeItem(progressKey); // очистим старый прогресс
+}
+
+    createTiles();
+    showQuestion(currentIndex);
+    updateTiles();
+    updateProgress();
+  })
+  .catch(err => alert(err));
+
+function pickRandom(array, count) {
+  return array.slice().sort(() => Math.random() - 0.5).slice(0, count);
+}
 function showQuestion(idx) { currentIndex = idx; const q=questions[idx]; const c=document.getElementById('question-area'); c.innerHTML=`<div class="question-block"><b>${idx+1}. ${q.q}</b></div>`; if(q.img)c.innerHTML+=`<img src="${q.img}">`; q.answers.forEach((ans,i)=>{ const d=document.createElement('div'); d.className='answer'; d.textContent=ans; if(userAnswers[idx]!==null){ if(i===q.correct)d.classList.add('correct'); if(i===userAnswers[idx]&&userAnswers[idx]!==q.correct)d.classList.add('wrong'); } d.onclick=()=>selectAnswer(idx,i); c.appendChild(d); }); updateTiles(); updateProgress(); saveProgress(); }
 function selectAnswer(qIdx,ansIdx){if(userAnswers[qIdx]!==null)return; userAnswers[qIdx]=ansIdx; showQuestion(qIdx); updateTiles(); updateProgress();}
 function updateProgress(){ const answered=userAnswers.filter(a=>a!==null).length; const percent=Math.round((answered/questions.length)*100); document.getElementById('progress-bar').style.width=percent+'%'; if(answered===questions.length) showResult(); }
@@ -275,6 +282,17 @@ function resetProgress(){ if(!confirm("Вы точно хотите сброси
 function showResult(){ const score=userAnswers.reduce((sum,a,i)=>sum+(a===questions[i].correct?1:0),0); document.getElementById('result').textContent=`Правильных ответов: ${score} из ${questions.length}`; localStorage.removeItem(progressKey); let history=JSON.parse(localStorage.getItem(historyKey))||[]; history.push({date:new Date().toISOString(),score:score,total:questions.length}); localStorage.setItem(historyKey,JSON.stringify(history)); }
 function toggleTheme(){ document.body.classList.toggle('dark'); localStorage.setItem('theme',document.body.classList.contains('dark')?'dark':'light'); }
 function toggleCount(){ const popup=document.getElementById('count-popup'); popup.style.display=(popup.style.display==='block')?'none':'block'; }
+// применяет выбранное количество вопросов
+document.getElementById('count').addEventListener('change', (e) => {
+  const newCount = parseInt(e.target.value);
+  if (isNaN(newCount) || newCount < 1) return;
+
+  const url = new URL(window.location.href);
+  url.searchParams.set('count', newCount);
+  url.searchParams.delete('progress'); // на всякий случай, чтобы не мешал старый
+  window.location.href = url.toString(); // перезапускаем тест с новым количеством
+});
+
 document.addEventListener('click',e=>{ const popup=document.getElementById('count-popup'); const btn=e.target.closest('.icon-btn'); if(!btn&&!popup.contains(e.target)) popup.style.display='none'; });
 if(localStorage.getItem('theme')==='dark') document.body.classList.add('dark');
 </script>
