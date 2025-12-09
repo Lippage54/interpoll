@@ -144,7 +144,6 @@ h1 {
 </div>
 
 <div class="corner-controls">
-    <button class="icon-btn" onclick="toggleCount()">🔢</button>
     <button class="icon-btn" onclick="toggleTheme()">🌓</button>
 
     <div class="count-popup" id="count-popup">
@@ -184,7 +183,6 @@ fetch('tests.json')
 
 function go() {
   if (!selectedId) return alert("Выберите тест.");
-  const count = document.getElementById('count').value;
   window.location.href = `test.html?id=${selectedId}&count=${count}`;
 }
 
