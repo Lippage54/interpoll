@@ -28,7 +28,6 @@ body {
     transition: background-color 0.6s, color 0.6s;
 }
 
-/* --- Панель управления внизу, как в тесте --- */
 .corner-controls {
     position: fixed;
     bottom: 10px;
@@ -51,25 +50,6 @@ body {
 }
 .icon-btn:hover { transform: scale(1.1); }
 
-.count-popup {
-    position: absolute;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--window-bg);
-    border-radius: 10px;
-    padding: 12px 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.25);
-    display: none;
-    text-align: center;
-}
-.count-popup input {
-    width: 80px;
-    padding: 6px;
-    text-align: center;
-}
-
-/* --- Главное окно --- */
 .window {
     background: var(--window-bg);
     width: 95%;
@@ -95,7 +75,6 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* --- Кнопки тестов --- */
 .test-btn {
     width: 100%;
     padding: 12px;
@@ -112,7 +91,6 @@ h1 {
 .test-btn:hover { background: rgba(0,123,255,0.1); }
 .selected { border-color: var(--accent); background: rgba(0,123,255,0.15); }
 
-/* --- Кнопка запуска --- */
 .start-btn {
     width: 100%;
     padding: 14px;
@@ -126,7 +104,6 @@ h1 {
 }
 .start-btn:hover { background: #005fcc; }
 
-/* --- Мобильная адаптация --- */
 @media (max-width: 600px) {
     .window { width: 90%; padding: 20px; margin: 40px auto; }
     h1 { font-size: 22px; }
@@ -145,12 +122,6 @@ h1 {
 
 <div class="corner-controls">
     <button class="icon-btn" onclick="toggleTheme()">🌓</button>
-
-    <div class="count-popup" id="count-popup">
-        <label>Вопросов:<br>
-            <input id="count" type="number" min="1" value="25">
-        </label>
-    </div>
 </div>
 
 <script>
@@ -183,24 +154,22 @@ fetch('tests.json')
 
 function go() {
   if (!selectedId) return alert("Выберите тест.");
-  window.location.href = `test.html?id=${selectedId}&count=${count}`;
+
+  // Проверяем localStorage на сохранённое количество вопросов для теста
+  let testCount = 25; // дефолт
+  const progressKey = `progress_${selectedId}`;
+  const savedProgress = JSON.parse(localStorage.getItem(progressKey));
+  if (savedProgress && savedProgress.questions) {
+    testCount = savedProgress.questions.length;
+  }
+
+  window.location.href = `test.html?id=${selectedId}&count=${testCount}`;
 }
 
 function toggleTheme() {
   document.body.classList.toggle('dark');
   localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
 }
-
-function toggleCount() {
-  const popup = document.getElementById('count-popup');
-  popup.style.display = (popup.style.display === 'block') ? 'none' : 'block';
-}
-
-document.addEventListener('click', e => {
-  const popup = document.getElementById('count-popup');
-  const btn = e.target.closest('.icon-btn');
-  if (!btn && !popup.contains(e.target)) popup.style.display = 'none';
-});
 
 if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
 </script>
