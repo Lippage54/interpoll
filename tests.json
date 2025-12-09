@@ -1,0 +1,12 @@
+[
+  {
+    "id": "hydro1",
+    "title": "Гидравлика — Тест 1",
+    "file": "tests/hydro1.json"
+  },
+  {
+    "id": "electrotech",
+    "title": "Электротехника — Тест 1",
+    "file": "tests/electrotech.json"
+  }
+]

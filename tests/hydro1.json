@@ -1,0 +1,26 @@
+{
+  "title": "Гидравлика — Тест 1",
+  "questionCount": 25,
+  "questions": [
+    {
+      "q": "Что показывает число Рейнольдса?",
+      "img": "images/hydro1/image1.png",
+      "answers": [
+        "Соотношение инерционных и вязкостных сил",
+        "Напор воды",
+        "Расход"
+      ],
+      "correct": 0
+    },
+    {
+      "q": "Формула расхода Q = ?",
+      "img": "images/hydro1/image2.png",
+      "answers": [
+        "Q = v·A",
+        "Q = ρgh",
+        "Q = d/t"
+      ],
+      "correct": 0
+    }
+  ]
+}

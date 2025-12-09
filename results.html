@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>История результатов</title>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Relief&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+}
+h1 { font-family: 'Comic Relief', cursive; text-align:center; }
+.test-history {
+    background: white;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+.test-history h2 { margin-top:0; font-size:18px; }
+.entry {
+    padding: 6px 10px;
+    border-bottom: 1px solid #ddd;
+}
+.entry:last-child { border-bottom: none; }
+.clear-btn {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.clear-btn:hover { background: #a71d2a; }
+</style>
+</head>
+<body>
+
+<h1>История результатов</h1>
+<div id="history-container"></div>
+
+<script>
+const container = document.getElementById('history-container');
+
+fetch('tests.json')
+    .then(r => r.json())
+    .then(tests => {
+        tests.forEach(t => {
+            const historyKey = `history_${t.id}`;
+            const history = JSON.parse(localStorage.getItem(historyKey)) || [];
+            if (history.length === 0) return;
+
+            const div = document.createElement('div');
+            div.className = 'test-history';
+            div.innerHTML = `<h2>${t.title}</h2>`;
+
+            history.forEach(h => {
+                const date = new Date(h.date).toLocaleString();
+                const score = `${h.score}/${h.total}`;
+                const entry = document.createElement('div');
+                entry.className = 'entry';
+                entry.textContent = `${date}: ${score}`;
+                div.appendChild(entry);
+            });
+
+            const clearBtn = document.createElement('button');
+            clearBtn.className = 'clear-btn';
+            clearBtn.textContent = 'Очистить историю';
+            clearBtn.onclick = () => {
+                localStorage.removeItem(historyKey);
+                div.remove();
+            };
+            div.appendChild(clearBtn);
+
+            container.appendChild(div);
+        });
+    });
+</script>
+
+</body>
+</html>
