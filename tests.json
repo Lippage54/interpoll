@@ -1,12 +1,12 @@
 [
   {
-    "id": "hydro1",
-    "title": "Гидравлика — Тест 1",
-    "file": "tests/hydro1.json"
+    "id": "gsu",
+    "title": "Гидросиловые установки и ВИЭ",
+    "file": "tests/gsu.json"
   },
   {
     "id": "electrotech",
-    "title": "Электротехника — Тест 1",
+    "title": "Электротехника",
     "file": "tests/electrotech.json"
   }
 ]
