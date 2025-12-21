@@ -8,5 +8,15 @@
     "id": "electrotech",
     "title": "Электротехника",
     "file": "tests/electrotech.json"
+  },
+    {
+    "id": "hydro",
+    "title": "Гидравлика",
+    "file": "tests/hydro.json"
+  },
+    {
+    "id": "vodsnab",
+    "title": "Водоснабжение и водоотведение",
+    "file": "tests/vodsnab.json"
   }
 ]
