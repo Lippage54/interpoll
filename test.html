@@ -285,19 +285,42 @@ function pickRandom(array, count) {
   return array.slice().sort(() => Math.random() - 0.5).slice(0, count);
 }
 
+function fixSubscriptsOutsideMath(text) {
+  const parts = text.split(/(\$[^$]*\$)/g);
+
+  return parts
+    .map(part => {
+      if (part.startsWith('$') && part.endsWith('$')) {
+        return part; // формулы не трогаем
+      }
+
+      // нижний индекс
+      part = part.replace(/~([^~]+)~/g, '<sub>$1</sub>');
+
+      // верхний индекс
+      part = part.replace(/\^([^^]+)\^/g, '<sup>$1</sup>');
+
+      return part;
+    })
+    .join('');
+}
 // --- showQuestion с MathJax и inline формулами ---
 function showQuestion(idx) {
     currentIndex = idx;
     const q = questions[idx];
     const c = document.getElementById('question-area');
 
-    c.innerHTML = `<div class="question-block"><b><span>${idx+1}. </span><span class="formula">${q.q}</span></b></div>`;
+    const questionText = fixSubscriptsOutsideMath(q.q);
+
+    c.innerHTML = `<div class="question-block"><b><span>${idx+1}. </span><span class="formula">${questionText}</span></b></div>`;
+    
     if(q.img) c.innerHTML += `<img src="${q.img}">`;
 
     q.answers.forEach((ans,i)=>{
         const d = document.createElement('div');
         d.className = 'answer';
-        d.innerHTML = `<span class="formula">${ans}</span>`; // текст с формулой
+        const answerText = fixSubscriptsOutsideMath(ans);
+        d.innerHTML = `<span class="formula">${answerText}</span>`; // текст с формулой
         // выделяем правильный и неправильный
         if(userAnswers[idx] !== null){
             if(i === q.correct) d.classList.add('correct');

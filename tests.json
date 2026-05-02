@@ -1,22 +1,17 @@
 [
   {
-    "id": "gsu",
-    "title": "Гидросиловые установки и ВИЭ",
-    "file": "tests/gsu.json"
-  },
-  {
-    "id": "electrotech",
-    "title": "Электротехника",
-    "file": "tests/electrotech.json"
-  },
-    {
     "id": "hydro",
     "title": "Гидравлика",
     "file": "tests/hydro.json"
   },
     {
-    "id": "vodsnab",
-    "title": "Водоснабжение и водоотведение",
-    "file": "tests/vodsnab.json"
-  }
+    "id": "nass",
+    "title": "Насосы и насосные станции",
+    "file": "tests/nass.json"
+  },
+    {
+    "id": "electrotech",
+    "title": "Электротехника",
+    "file": "tests/electrotech.json"
+  }  
 ]
