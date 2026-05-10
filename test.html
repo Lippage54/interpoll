@@ -193,6 +193,19 @@ h1 {
 
 .result { font-weight: bold; margin-top: 15px; text-align: center; }
 
+.answer img.formula-image {
+    display: block;
+
+    max-width: 220px;
+    max-height: 80px;
+
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+
+    margin: 0 auto;
+}
 /* --- Мобильная адаптация --- */
 @media (max-width: 600px) {
     .window { width: 90%; margin: 20px auto; padding: 20px; }
@@ -241,36 +254,58 @@ let questionCount = parseInt(params.get('count')) || 10;
 
 const progressKey = `progress_${testId}`;
 const historyKey = `history_${testId}`;
-let questions = [], userAnswers = [], currentIndex = 0, testData = null;
+
+let questions = [];
+let userAnswers = [];
+let currentIndex = 0;
+let testData = null;
 
 fetch('tests.json')
   .then(r => r.json())
   .then(list => {
     const item = list.find(t => t.id === testId);
+
     if (!item) throw "Тест не найден";
+
     return fetch(item.file);
   })
   .then(r => r.json())
   .then(data => {
     testData = data;
+
     document.getElementById('title').textContent = data.title;
 
     let savedProgress = JSON.parse(localStorage.getItem(progressKey));
+
     if (savedProgress && savedProgress.questions.length === questionCount) {
       questions = savedProgress.questions;
       userAnswers = savedProgress.userAnswers;
       currentIndex = savedProgress.currentIndex;
     } else {
+
       const selected = pickRandom(data.questions, questionCount);
+
       questions = selected
         .sort(() => Math.random() - 0.5)
         .map(q => {
-          const order = q.answers.map((_, i) => i).sort(() => Math.random() - 0.5);
+
+          const order = q.answers
+            .map((_, i) => i)
+            .sort(() => Math.random() - 0.5);
+
           const shuffledAnswers = order.map(i => q.answers[i]);
+
           const newCorrect = order.indexOf(q.correct);
-          return { ...q, answers: shuffledAnswers, correct: newCorrect };
+
+          return {
+            ...q,
+            answers: shuffledAnswers,
+            correct: newCorrect
+          };
         });
+
       userAnswers = Array(questions.length).fill(null);
+
       localStorage.removeItem(progressKey);
     }
 
@@ -282,88 +317,361 @@ fetch('tests.json')
   .catch(err => alert(err));
 
 function pickRandom(array, count) {
-  return array.slice().sort(() => Math.random() - 0.5).slice(0, count);
+  return array
+    .slice()
+    .sort(() => Math.random() - 0.5)
+    .slice(0, count);
 }
 
 function fixSubscriptsOutsideMath(text) {
+
   const parts = text.split(/(\$[^$]*\$)/g);
 
   return parts
     .map(part => {
+
       if (part.startsWith('$') && part.endsWith('$')) {
-        return part; // формулы не трогаем
+        return part;
       }
 
-      // нижний индекс
       part = part.replace(/~([^~]+)~/g, '<sub>$1</sub>');
-
-      // верхний индекс
       part = part.replace(/\^([^^]+)\^/g, '<sup>$1</sup>');
 
       return part;
     })
     .join('');
 }
-// --- showQuestion с MathJax и inline формулами ---
-function showQuestion(idx) {
-    currentIndex = idx;
-    const q = questions[idx];
-    const c = document.getElementById('question-area');
 
-    const questionText = fixSubscriptsOutsideMath(q.q);
-
-    c.innerHTML = `<div class="question-block"><b><span>${idx+1}. </span><span class="formula">${questionText}</span></b></div>`;
-    
-    if(q.img) c.innerHTML += `<img src="${q.img}">`;
-
-    q.answers.forEach((ans,i)=>{
-        const d = document.createElement('div');
-        d.className = 'answer';
-        const answerText = fixSubscriptsOutsideMath(ans);
-        d.innerHTML = `<span class="formula">${answerText}</span>`; // текст с формулой
-        // выделяем правильный и неправильный
-        if(userAnswers[idx] !== null){
-            if(i === q.correct) d.classList.add('correct');
-            if(i === userAnswers[idx] && userAnswers[idx] !== q.correct) d.classList.add('wrong');
-        }
-        d.onclick = () => selectAnswer(idx, i);
-        c.appendChild(d);
-    });
-
-
-    updateTiles();
-    updateProgress();
-    saveProgress();
-
-    // Рендер формул MathJax
-    if(window.MathJax && MathJax.typesetPromise){
-        MathJax.typesetPromise(Array.from(c.querySelectorAll('.formula')))
-            .catch(err=>console.log(err.message));
-    }
+function isImageMarkdown(text) {
+  return /^!\[\]\(media\/.*\.(png|jpg|jpeg|webp|gif)\)$/i.test(text.trim());
 }
 
-function selectAnswer(qIdx,ansIdx){if(userAnswers[qIdx]!==null)return; userAnswers[qIdx]=ansIdx; showQuestion(qIdx); updateTiles(); updateProgress();}
-function updateProgress(){ const answered=userAnswers.filter(a=>a!==null).length; const percent=Math.round((answered/questions.length)*100); document.getElementById('progress-bar').style.width=percent+'%'; if(answered===questions.length) showResult(); }
-function createTiles(){ const tiles=document.getElementById('tiles'); tiles.innerHTML=''; questions.forEach((_,i)=>{ const div=document.createElement('div'); div.className='tile'; div.textContent=i+1; div.onclick=()=>showQuestion(i); tiles.appendChild(div); }); }
-function updateTiles(){ const tiles=document.getElementById('tiles').children; for(let i=0;i<tiles.length;i++){ tiles[i].classList.remove('current','correct','wrong'); if(i===currentIndex) tiles[i].classList.add('current'); if(userAnswers[i]!==null){ if(userAnswers[i]===questions[i].correct) tiles[i].classList.add('correct'); else tiles[i].classList.add('wrong'); } } }
-document.getElementById('prev-btn').onclick=()=>{if(currentIndex>0)showQuestion(currentIndex-1);};
-document.getElementById('next-btn').onclick=()=>{if(currentIndex<questions.length-1)showQuestion(currentIndex+1);};
-function saveProgress(){ localStorage.setItem(progressKey,JSON.stringify({questions,userAnswers,currentIndex})); }
-function resetProgress(){ if(!confirm("Вы точно хотите сбросить прогресс?")) return; localStorage.removeItem(progressKey); questions=questions.sort(()=>Math.random()-0.5).map(q=>{ const order=q.answers.map((_,i)=>i).sort(()=>Math.random()-0.5); const shuffledAnswers=order.map(i=>q.answers[i]); const newCorrect=order.indexOf(q.correct); return {...q,answers:shuffledAnswers,correct:newCorrect}; }); userAnswers=Array(questions.length).fill(null); currentIndex=0; createTiles(); showQuestion(currentIndex); }
-function showResult(){ const score=userAnswers.reduce((sum,a,i)=>sum+(a===questions[i].correct?1:0),0); document.getElementById('result').textContent=`Правильных ответов: ${score} из ${questions.length}`; localStorage.removeItem(progressKey); let history=JSON.parse(localStorage.getItem(historyKey))||[]; history.push({date:new Date().toISOString(),score:score,total:questions.length}); localStorage.setItem(historyKey,JSON.stringify(history)); }
-function toggleTheme(){ document.body.classList.toggle('dark'); localStorage.setItem('theme',document.body.classList.contains('dark')?'dark':'light'); }
-function toggleCount(){ const popup=document.getElementById('count-popup'); popup.style.display=(popup.style.display==='block')?'none':'block'; }
-document.getElementById('count').addEventListener('change', (e) => {
-  const newCount = parseInt(e.target.value);
-  if (isNaN(newCount) || newCount < 1) return;
-  const url = new URL(window.location.href);
-  url.searchParams.set('count', newCount);
-  url.searchParams.delete('progress'); 
-  window.location.href = url.toString();
-});
-document.addEventListener('click',e=>{ const popup=document.getElementById('count-popup'); const btn=e.target.closest('.icon-btn'); if(!btn&&!popup.contains(e.target)) popup.style.display='none'; });
-if(localStorage.getItem('theme')==='dark') document.body.classList.add('dark');
-</script>
+function getImagePath(markdown) {
 
+  const match = markdown.match(/!\[\]\(media\/(.*?)\)/i);
+
+  if (!match) return "";
+
+  const fileName = match[1];
+
+  return `./images/${testId}/${fileName}`;
+}
+
+function renderContent(content) {
+
+  if (isImageMarkdown(content)) {
+
+    const path = getImagePath(content);
+
+    return `
+      <img 
+        src="${path}" 
+        class="formula-image"
+        alt="formula"
+      >
+    `;
+  }
+
+  return `<span class="formula">${fixSubscriptsOutsideMath(content)}</span>`;
+}
+
+function showQuestion(idx) {
+
+  currentIndex = idx;
+
+  const q = questions[idx];
+
+  const c = document.getElementById('question-area');
+
+  c.innerHTML = '';
+
+  const questionDiv = document.createElement('div');
+
+  questionDiv.className = 'question-block';
+
+  questionDiv.innerHTML = `
+    <b>
+      <span>${idx + 1}. </span>
+      ${renderContent(q.q)}
+    </b>
+  `;
+
+  c.appendChild(questionDiv);
+
+  if (q.img) {
+
+    const img = document.createElement('img');
+
+    img.src = q.img;
+
+    img.className = 'question-image';
+
+    c.appendChild(img);
+  }
+
+  q.answers.forEach((ans, i) => {
+
+    const d = document.createElement('div');
+
+    d.className = 'answer';
+
+    d.innerHTML = renderContent(ans);
+
+    if (userAnswers[idx] !== null) {
+
+      if (i === q.correct) {
+        d.classList.add('correct');
+      }
+
+      if (
+        i === userAnswers[idx] &&
+        userAnswers[idx] !== q.correct
+      ) {
+        d.classList.add('wrong');
+      }
+    }
+
+    d.onclick = () => selectAnswer(idx, i);
+
+    c.appendChild(d);
+  });
+
+  updateTiles();
+  updateProgress();
+  saveProgress();
+
+  if (window.MathJax && MathJax.typesetPromise) {
+
+    MathJax.typesetPromise(
+      Array.from(c.querySelectorAll('.formula'))
+    ).catch(err => console.log(err.message));
+  }
+}
+
+function selectAnswer(qIdx, ansIdx) {
+
+  if (userAnswers[qIdx] !== null) return;
+
+  userAnswers[qIdx] = ansIdx;
+
+  showQuestion(qIdx);
+
+  updateTiles();
+
+  updateProgress();
+}
+
+function updateProgress() {
+
+  const answered =
+    userAnswers.filter(a => a !== null).length;
+
+  const percent =
+    Math.round((answered / questions.length) * 100);
+
+  document.getElementById('progress-bar').style.width =
+    percent + '%';
+
+  if (answered === questions.length) {
+    showResult();
+  }
+}
+
+function createTiles() {
+
+  const tiles = document.getElementById('tiles');
+
+  tiles.innerHTML = '';
+
+  questions.forEach((_, i) => {
+
+    const div = document.createElement('div');
+
+    div.className = 'tile';
+
+    div.textContent = i + 1;
+
+    div.onclick = () => showQuestion(i);
+
+    tiles.appendChild(div);
+  });
+}
+
+function updateTiles() {
+
+  const tiles =
+    document.getElementById('tiles').children;
+
+  for (let i = 0; i < tiles.length; i++) {
+
+    tiles[i].classList.remove(
+      'current',
+      'correct',
+      'wrong'
+    );
+
+    if (i === currentIndex) {
+      tiles[i].classList.add('current');
+    }
+
+    if (userAnswers[i] !== null) {
+
+      if (userAnswers[i] === questions[i].correct) {
+        tiles[i].classList.add('correct');
+      } else {
+        tiles[i].classList.add('wrong');
+      }
+    }
+  }
+}
+
+document.getElementById('prev-btn').onclick = () => {
+
+  if (currentIndex > 0) {
+    showQuestion(currentIndex - 1);
+  }
+};
+
+document.getElementById('next-btn').onclick = () => {
+
+  if (currentIndex < questions.length - 1) {
+    showQuestion(currentIndex + 1);
+  }
+};
+
+function saveProgress() {
+
+  localStorage.setItem(
+    progressKey,
+    JSON.stringify({
+      questions,
+      userAnswers,
+      currentIndex
+    })
+  );
+}
+
+function resetProgress() {
+
+  if (!confirm("Вы точно хотите сбросить прогресс?")) {
+    return;
+  }
+
+  localStorage.removeItem(progressKey);
+
+  questions = questions
+    .sort(() => Math.random() - 0.5)
+    .map(q => {
+
+      const order = q.answers
+        .map((_, i) => i)
+        .sort(() => Math.random() - 0.5);
+
+      const shuffledAnswers =
+        order.map(i => q.answers[i]);
+
+      const newCorrect =
+        order.indexOf(q.correct);
+
+      return {
+        ...q,
+        answers: shuffledAnswers,
+        correct: newCorrect
+      };
+    });
+
+  userAnswers = Array(questions.length).fill(null);
+
+  currentIndex = 0;
+
+  createTiles();
+
+  showQuestion(currentIndex);
+}
+
+function showResult() {
+
+  const score = userAnswers.reduce(
+    (sum, a, i) =>
+      sum + (a === questions[i].correct ? 1 : 0),
+    0
+  );
+
+  document.getElementById('result').textContent =
+    `Правильных ответов: ${score} из ${questions.length}`;
+
+  localStorage.removeItem(progressKey);
+
+  let history =
+    JSON.parse(localStorage.getItem(historyKey)) || [];
+
+  history.push({
+    date: new Date().toISOString(),
+    score: score,
+    total: questions.length
+  });
+
+  localStorage.setItem(
+    historyKey,
+    JSON.stringify(history)
+  );
+}
+
+function toggleTheme() {
+
+  document.body.classList.toggle('dark');
+
+  localStorage.setItem(
+    'theme',
+    document.body.classList.contains('dark')
+      ? 'dark'
+      : 'light'
+  );
+}
+
+function toggleCount() {
+
+  const popup =
+    document.getElementById('count-popup');
+
+  popup.style.display =
+    (popup.style.display === 'block')
+      ? 'none'
+      : 'block';
+}
+
+document
+  .getElementById('count')
+  .addEventListener('change', (e) => {
+
+    const newCount = parseInt(e.target.value);
+
+    if (isNaN(newCount) || newCount < 1) return;
+
+    const url = new URL(window.location.href);
+
+    url.searchParams.set('count', newCount);
+
+    url.searchParams.delete('progress');
+
+    window.location.href = url.toString();
+});
+
+document.addEventListener('click', e => {
+
+  const popup =
+    document.getElementById('count-popup');
+
+  const btn = e.target.closest('.icon-btn');
+
+  if (!btn && !popup.contains(e.target)) {
+    popup.style.display = 'none';
+  }
+});
+
+if (localStorage.getItem('theme') === 'dark') {
+  document.body.classList.add('dark');
+}
+</script>
 </body>
 </html>
