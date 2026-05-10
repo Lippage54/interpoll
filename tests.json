@@ -5,6 +5,11 @@
     "file": "tests/hydro.json"
   },
     {
+    "id": "hydro2",
+    "title": "Гидравлические расчёты",
+    "file": "tests/hydro2.json"
+  },
+    {
     "id": "nass",
     "title": "Насосы и насосные станции",
     "file": "tests/nass.json"
