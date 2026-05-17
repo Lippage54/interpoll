@@ -193,19 +193,19 @@ h1 {
 
 .result { font-weight: bold; margin-top: 15px; text-align: center; }
 
-.answer img.formula-image {
-    display: block;
+.formula-image {
+    display: inline-block;
 
-    max-width: 220px;
-    max-height: 80px;
+    vertical-align: middle;
 
+    height: 4em;
     width: auto;
-    height: auto;
+
+    margin: 0 2px;
 
     object-fit: contain;
-
-    margin: 0 auto;
 }
+
 /* --- Мобильная адаптация --- */
 @media (max-width: 600px) {
     .window { width: 90%; margin: 20px auto; padding: 20px; }
@@ -359,20 +359,27 @@ function getImagePath(markdown) {
 
 function renderContent(content) {
 
-  if (isImageMarkdown(content)) {
+  // заменяем ВСЕ markdown-картинки на <img>
+  content = content.replace(
+    /!\[\]\(media\/(.*?)\)/gi,
+    (match, fileName) => {
 
-    const path = getImagePath(content);
+      const path = `./images/${testId}/${fileName}`;
 
-    return `
-      <img 
-        src="${path}" 
-        class="formula-image"
-        alt="formula"
-      >
-    `;
-  }
+      return `
+        <img
+          src="${path}"
+          class="formula-image"
+          alt="formula"
+        >
+      `;
+    }
+  );
 
-  return `<span class="formula">${fixSubscriptsOutsideMath(content)}</span>`;
+  // обработка индексов/степеней
+  content = fixSubscriptsOutsideMath(content);
+
+  return `<span class="formula">${content}</span>`;
 }
 
 function showQuestion(idx) {
