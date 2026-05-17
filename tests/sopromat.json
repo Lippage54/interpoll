@@ -89,11 +89,11 @@
       "q": "Сыртқы күштердiң түрлерiн атаңыз?",
       "img": "",
       "answers": [
-        "![](image1.wmf)",
-        "![](image2.wmf)",
-        "![](image3.wmf)",
-        "![](image4.wmf)",
-        "![](image5.wmf)"
+        "![](media/image1.png)",
+        "![](media/image2.png)",
+        "![](media/image3.png)",
+        "![](media/image4.png)",
+        "![](media/image5.png)"
       ],
       "correct": 0
     },
@@ -544,11 +544,11 @@
       "q": "Сыртқы күштердiң түрлерiн атаңыз?",
       "img": "",
       "answers": [
-        "![](image1.wmf)",
-        "![](image2.wmf)",
-        "![](image3.wmf)",
-        "![](image4.wmf)",
-        "![](image5.wmf)"
+        "![](media/image1.png)",
+        "![](media/image2.png)",
+        "![](media/image3.png)",
+        "![](media/image4.png)",
+        "![](media/image5.png)"
       ],
       "correct": 0
     },
@@ -604,9 +604,9 @@
       "q": "Статиканың тепе-теңдiк теңдеулерiн жазыңыз?",
       "img": "",
       "answers": [
-        "![](image6.wmf) ![](image7.wmf) ![](image8.wmf) ![](image9.wmf) ![](image10.wmf) ![](image11.wmf)",
-        "![](image12.wmf)![](image1.wmf),$\\sigma = \\frac{M_{x}}{W_{x}} = 0$",
-        "$\\Sigma F_{y} = 0;$ ![](image7.wmf) ![](image8.wmf) ![](image13.wmf) ![](image14.wmf)",
+        "![](media/image6.png) ![](media/image7.png) ![](media/image8.png) ![](media/image9.png) ![](media/image10.png) ![](media/image11.png)",
+        "![](media/image12.png)![](media/image1.png),$\\sigma = \\frac{M_{x}}{W_{x}} = 0$",
+        "$\\Sigma F_{y} = 0;$ ![](media/image7.png) ![](media/image8.png) ![](media/image13.png) ![](media/image14.png)",
         "$\\sigma = \\frac{M_{x}}{W_{x}} = 0$,$\\tau = \\frac{Q}{A} = 0$",
         "$\\tau = \\frac{Q}{A} = 0$,$\\sigma = \\frac{M_{x}}{W_{x}} = 0$"
       ],
@@ -628,11 +628,11 @@
       "q": "Созылу жағдайындығы тiк кернеу қалай анықталады?",
       "img": "",
       "answers": [
-        "![](image15.wmf)",
-        "![](image16.wmf) ![](image17.wmf)",
-        "![](image18.wmf)",
-        "![](image19.wmf).",
-        "![](image20.wmf)"
+        "![](media/image15.png)",
+        "![](media/image16.png) ![](media/image17.png)",
+        "![](media/image18.png)",
+        "![](media/image19.png).",
+        "![](media/image20.png)"
       ],
       "correct": 0
     },
@@ -640,11 +640,11 @@
       "q": "Гук заңының өрнегiн жазыңыз?",
       "img": "",
       "answers": [
-        "![](image16.wmf) ![](image17.wmf)",
-        "![](image15.wmf)",
+        "![](media/image16.png) ![](media/image17.png)",
+        "![](media/image15.png)",
         "$\\Delta l = \\frac{Мl}{EA};$",
-        "![](image19.wmf)",
-        "![](image20.wmf)=0,5."
+        "![](media/image19.png)",
+        "![](media/image20.png)=0,5."
       ],
       "correct": 0
     },
@@ -652,11 +652,11 @@
       "q": "Материалдың абсолюттік деформациясы дегенiмiз не?",
       "img": "",
       "answers": [
-        "![](image18.wmf)",
-        "![](image19.wmf),![](image16.wmf)",
-        "![](image15.wmf)![](image17.wmf)",
-        "![](image16.wmf) ![](image17.wmf)",
-        "![](image20.wmf), ![](image17.wmf)."
+        "![](media/image18.png)",
+        "![](media/image19.png),![](media/image16.png)",
+        "![](media/image15.png)![](media/image17.png)",
+        "![](media/image16.png) ![](media/image17.png)",
+        "![](media/image20.png), ![](media/image17.png)."
       ],
       "correct": 0
     },
@@ -664,10 +664,10 @@
       "q": "Материалдың серпiмдiлiк модулi \\...",
       "img": "",
       "answers": [
-        "![](image19.wmf)",
-        "![](image15.wmf)",
-        "![](image16.wmf) ![](image17.wmf)",
-        "![](image18.wmf)",
+        "![](media/image19.png)",
+        "![](media/image15.png)",
+        "![](media/image16.png) ![](media/image17.png)",
+        "![](media/image18.png)",
         "$\\mu$."
       ],
       "correct": 0
@@ -676,10 +676,10 @@
       "q": "Пуассон коэффициентi дегенiмiз не?",
       "img": "",
       "answers": [
-        "![](image20.wmf)",
+        "![](media/image20.png)",
         "$E$",
-        "![](image16.wmf)",
-        "![](image17.wmf)",
+        "![](media/image16.png)",
+        "![](media/image17.png)",
         "$G$."
       ],
       "correct": 0
@@ -689,10 +689,10 @@
       "img": "",
       "answers": [
         "EA",
-        "![](image16.wmf)",
-        "![](image17.wmf)",
-        "![](image21.wmf)",
-        "![](image22.wmf)."
+        "![](media/image16.png)",
+        "![](media/image17.png)",
+        "![](media/image21.png)",
+        "![](media/image22.png)."
       ],
       "correct": 0
     },
@@ -703,8 +703,8 @@
         "Қима тәсiлiмен",
         "EA -- көбейтіндісімен",
         "Оның өзгеру заңдылығының графигiмен",
-        "![](image21.wmf)формуласымен",
-        "![](image22.wmf) деформациясымен."
+        "![](media/image21.png)формуласымен",
+        "![](media/image22.png) деформациясымен."
       ],
       "correct": 0
     },
@@ -715,8 +715,8 @@
         "Оның өзгеру заңдылығының графигi",
         "EA өзгеру заңдылығы",
         "Қима тәсiлiнің өзгеруі",
-        "![](image21.wmf)өрнегімен анықталады",
-        "![](image22.wmf)теңдігі."
+        "![](media/image21.png)өрнегімен анықталады",
+        "![](media/image22.png)теңдігі."
       ],
       "correct": 0
     },
@@ -724,11 +724,11 @@
       "q": "Созылған сырықтың абсолюттiк бойлық деформациясы (Гук заңы) неге тең?",
       "img": "",
       "answers": [
-        "![](image21.wmf)",
+        "![](media/image21.png)",
         "EA",
-        "![](image23.wmf)",
-        "![](image24.wmf)",
-        "![](image22.wmf)."
+        "![](media/image23.png)",
+        "![](media/image24.png)",
+        "![](media/image22.png)."
       ],
       "correct": 0
     },
@@ -736,11 +736,11 @@
       "q": "Салыстырмалы деформациялар дегенiмiз не?",
       "img": "",
       "answers": [
-        "![](image22.wmf)",
+        "![](media/image22.png)",
         "EA",
-        "![](image24.wmf)",
+        "![](media/image24.png)",
         "Оның өзгеруі",
-        "![](image21.wmf)."
+        "![](media/image21.png)."
       ],
       "correct": 0
     },
@@ -748,11 +748,11 @@
       "q": "Созылған сырық үшiн берiктiк шартын жаз.",
       "img": "",
       "answers": [
-        "![](image23.wmf)",
-        "![](image24.wmf)",
-        "![](image25.wmf)",
-        "![](image21.wmf)",
-        "![](image22.wmf)."
+        "![](media/image23.png)",
+        "![](media/image24.png)",
+        "![](media/image25.png)",
+        "![](media/image21.png)",
+        "![](media/image22.png)."
       ],
       "correct": 0
     },
@@ -760,9 +760,9 @@
       "q": "Мүмкiндiк кернеу қалай анықталады?",
       "img": "",
       "answers": [
-        "![](image24.wmf)",
-        "![](image23.wmf)",
-        "![](image25.wmf)",
+        "![](media/image24.png)",
+        "![](media/image23.png)",
+        "![](media/image25.png)",
         "тәжiрибеден қыздырып",
         "берiктiгiн үшке көбейту арқылы."
       ],
@@ -772,10 +772,10 @@
       "q": "Материалдардың механикалық қасиеттерiне қандай шамалар жатады?",
       "img": "",
       "answers": [
-        "![](image25.wmf)",
-        "![](image23.wmf)",
-        "![](image24.wmf)",
-        "![](image22.wmf)",
+        "![](media/image25.png)",
+        "![](media/image23.png)",
+        "![](media/image24.png)",
+        "![](media/image22.png)",
         "берiктiгiнің қатаңдығын сипаттайтын шамалар."
       ],
       "correct": 0
@@ -785,8 +785,8 @@
       "img": "",
       "answers": [
         "тәжiрибеден",
-        "![](image23.wmf)формуласымен",
-        "![](image24.wmf) формуласымен",
+        "![](media/image23.png)формуласымен",
+        "![](media/image24.png) формуласымен",
         "күйдіру арқылы",
         "берiктiгiнен."
       ],
@@ -799,8 +799,8 @@
         "берiктiгiн",
         "тәжiрибелік",
         "пластикалық",
-        "![](image24.wmf)",
-        "![](image25.wmf)."
+        "![](media/image24.png)",
+        "![](media/image25.png)."
       ],
       "correct": 0
     },
@@ -1192,11 +1192,11 @@
       "q": "Гуктың кернеулер арқылы жазылған формуласы-заңы?",
       "img": "",
       "answers": [
-        "![](image16.wmf) ![](image17.wmf)",
-        "![](image15.wmf)",
+        "![](media/image16.png) ![](media/image17.png)",
+        "![](media/image15.png)",
         "$\\Delta l = \\frac{Мl}{EA};$",
-        "![](image19.wmf)",
-        "![](image20.wmf)=0,<question>"
+        "![](media/image19.png)",
+        "![](media/image20.png)=0,<question>"
       ],
       "correct": 0
     },
@@ -1204,11 +1204,11 @@
       "q": "Материалдың абсолюттік ұзаруын қалай табамыз?",
       "img": "",
       "answers": [
-        "![](image18.wmf)",
-        "![](image19.wmf),![](image16.wmf)",
-        "![](image15.wmf)![](image17.wmf)",
-        "![](image16.wmf) ![](image17.wmf)",
-        "![](image20.wmf), ![](image17.wmf)."
+        "![](media/image18.png)",
+        "![](media/image19.png),![](media/image16.png)",
+        "![](media/image15.png)![](media/image17.png)",
+        "![](media/image16.png) ![](media/image17.png)",
+        "![](media/image20.png), ![](media/image17.png)."
       ],
       "correct": 0
     },
@@ -1216,10 +1216,10 @@
       "q": "Материалдың серпiмдiлiк модулдерi?",
       "img": "",
       "answers": [
-        "![](image19.wmf)",
-        "![](image15.wmf)",
-        "![](image16.wmf) ![](image17.wmf)",
-        "![](image18.wmf)",
+        "![](media/image19.png)",
+        "![](media/image15.png)",
+        "![](media/image16.png) ![](media/image17.png)",
+        "![](media/image18.png)",
         "$\\mu$."
       ],
       "correct": 0
@@ -1576,11 +1576,11 @@
       "q": "Қарапайым қималардың (төртбұрыш, дөңгелек\\...) өстiк (орталық) инерция моменттерiнiң өрнегiн жазыңыз?",
       "img": "",
       "answers": [
-        "$Ι_{х}$=$\\frac{вh^{3}}{12}$; I~x~=I~y~=![](image26.wmf)$\\frac{\\pi Д^{4}}{64}$;![](image27.wmf)",
-        "A, S, J, W, W![](image28.wmf), J![](image28.wmf)",
+        "$Ι_{х}$=$\\frac{вh^{3}}{12}$; I~x~=I~y~=![](media/image26.png)$\\frac{\\pi Д^{4}}{64}$;![](media/image27.png)",
+        "A, S, J, W, W![](media/image28.png), J![](media/image28.png)",
         "J~x~, J~y~ - экстремаль, J~xy~=0",
         "J~x~, J~y~ - экстремаль өстер",
-        "![](image29.wmf)"
+        "![](media/image29.png)"
       ],
       "correct": 0
     },
@@ -1589,10 +1589,10 @@
       "img": "",
       "answers": [
         "J~x~, J~y~ - экстремаль, J~xy~ = <question>",
-        "A, S, J, W, W![](image28.wmf), J![](image28.wmf)",
-        "$Ι_{х}$=$\\frac{вh^{3}}{12}$, I~x~=I~y~=![](image26.wmf)$\\frac{\\pi Д^{4}}{64}$![](image27.wmf)",
+        "A, S, J, W, W![](media/image28.png), J![](media/image28.png)",
+        "$Ι_{х}$=$\\frac{вh^{3}}{12}$, I~x~=I~y~=![](media/image26.png)$\\frac{\\pi Д^{4}}{64}$![](media/image27.png)",
         "J~x~, J~y~ - экстремаль өстер.",
-        "![](image29.wmf)"
+        "![](media/image29.png)"
       ],
       "correct": 0
     },
@@ -1601,10 +1601,10 @@
       "img": "",
       "answers": [
         "J~x~, J~y~ - экстремаль мәнге ие эк<variant> өстерд<variant>",
-        "A, S, J, W, W![](image28.wmf), J![](image28.wmf)",
-        "I~x1~=I~x~+a^2^\\*A, ![](image29.wmf)",
+        "A, S, J, W, W![](media/image28.png), J![](media/image28.png)",
+        "I~x1~=I~x~+a^2^\\*A, ![](media/image29.png)",
         "J~x~, J~y~ - экстремаль, J~xy~=0",
-        "![](image29.wmf)"
+        "![](media/image29.png)"
       ],
       "correct": 0
     },
@@ -1612,9 +1612,9 @@
       "q": "Өстер орнын параллел қозғағанда инерция моменттерiнiң өзгеруiн жазыңыз.",
       "img": "",
       "answers": [
-        "![](image29.wmf)",
-        "A, S, J, W, W![](image28.wmf), J![](image28.wmf)",
-        "![](image27.wmf)",
+        "![](media/image29.png)",
+        "A, S, J, W, W![](media/image28.png), J![](media/image28.png)",
+        "![](media/image27.png)",
         "J~x~, J~y~ - экстремаль, J~xy~=0",
         "J~x~, J~y~ - экстремаль өстер"
       ],
@@ -1625,7 +1625,7 @@
       "img": "",
       "answers": [
         "Иiлу мөлшерi мен бұрышын анықтау үшiн",
-        "![](image30.wmf)",
+        "![](media/image30.png)",
         "Басты өстердi жүргiзу үшiн",
         "Қосымша деформация теңдеуi арқылы қосымша кернеу пайда болады",
         "Жүйенi қате жинаудан туындайтын күштер"
@@ -1636,7 +1636,7 @@
       "q": "Қиманың ауырлық орталығының орнын қалай анықтайды?",
       "img": "",
       "answers": [
-        "![](image30.wmf)",
+        "![](media/image30.png)",
         "Иiлу мөлшерi мен бұрышын анықтау үшiн",
         "Басты өстерi жүргiзу үшiн",
         "Қосымша деформация теңдеуi арқылы қосымша кернеу пайда болады",
@@ -1650,7 +1650,7 @@
       "answers": [
         "Басты өстерi жүргiзу үшiн",
         "Иiлу мөлшерi мен бұрышын анықтау үшiн",
-        "![](image30.wmf)",
+        "![](media/image30.png)",
         "Қосымша деформация теңдеуi арқылы қосымша кернеу пайда болады",
         "Жүйенi қате жинаудан туындайтын күштер"
       ],
@@ -1663,7 +1663,7 @@
         "Қимада m~x~, m~y~ болуы",
         "m~u~, m~б~ , Р болуы",
         "m~x~, m~y~, N~z~ болуы",
-        "![](image31.wmf) ![](image32.wmf)"
+        "![](media/image31.png) ![](media/image32.png)"
       ],
       "correct": 0
     },
@@ -1674,8 +1674,8 @@
         "Қимада m~u~, m~б~ болуы",
         "m~x~, m~y~ болуы",
         "m~x~, m~y~, N~z~ болуы",
-        "![](image31.wmf)",
-        "![](image32.wmf)"
+        "![](media/image31.png)",
+        "![](media/image32.png)"
       ],
       "correct": 0
     },
@@ -1686,8 +1686,8 @@
         "Қимада m~x~, m~y~, N~z~ болуы",
         "m~x~, m~y~ болуы",
         "m~u~, m~б~ болуы",
-        "![](image31.wmf)",
-        "![](image32.wmf)"
+        "![](media/image31.png)",
+        "![](media/image32.png)"
       ],
       "correct": 0
     },
@@ -1696,9 +1696,9 @@
       "img": "",
       "answers": [
         "Бастапқы тепе-теңдiк қалпын сақтауы",
-        "![](image33.wmf)",
-        "![](image34.wmf)",
-        "![](image35.wmf)",
+        "![](media/image33.png)",
+        "![](media/image34.png)",
+        "![](media/image35.png)",
         "Сырықтың сығылуы."
       ],
       "correct": 0
@@ -1707,10 +1707,10 @@
       "q": "Эйлер өрнегiн жазыңыз:",
       "img": "",
       "answers": [
-        "![](image33.wmf)",
+        "![](media/image33.png)",
         "Бастапқы тепе-теңдiк қалпын сақтауы",
-        "![](image34.wmf)",
-        "![](image35.wmf)",
+        "![](media/image34.png)",
+        "![](media/image35.png)",
         "Сырықтың сығылуы"
       ],
       "correct": 0
@@ -1719,10 +1719,10 @@
       "q": "Ясинский формуласын жазыңыз.",
       "img": "",
       "answers": [
-        "![](image34.wmf)",
+        "![](media/image34.png)",
         "Бастапқы тепе-теңдiк қалпын сақтауы",
-        "![](image33.wmf)",
-        "![](image35.wmf)",
+        "![](media/image33.png)",
+        "![](media/image35.png)",
         "Сырықтың сығылуы"
       ],
       "correct": 0
@@ -1731,10 +1731,10 @@
       "q": "Орнықтылық шартын жазыңыз.",
       "img": "",
       "answers": [
-        "![](image35.wmf)",
+        "![](media/image35.png)",
         "Бастапқы тепе-теңдiк қалпын сақтауы",
-        "![](image33.wmf)",
-        "![](image34.wmf)",
+        "![](media/image33.png)",
+        "![](media/image34.png)",
         "Сырықтың сығылуы"
       ],
       "correct": 0
@@ -1744,10 +1744,10 @@
       "img": "",
       "answers": [
         "Иiлгiштiкке тәуелдi кестеден",
-        "![](image36.wmf)",
-        "![](image37.wmf)",
-        "![](image38.wmf)",
-        "![](image39.wmf)"
+        "![](media/image36.png)",
+        "![](media/image37.png)",
+        "![](media/image38.png)",
+        "![](media/image39.png)"
       ],
       "correct": 0
     },
@@ -1755,11 +1755,11 @@
       "q": "Иiлгiштiк қалай анықталады?",
       "img": "",
       "answers": [
-        "![](image36.wmf)",
+        "![](media/image36.png)",
         "Иiлгiштiкке тәуелдi кестеден",
-        "![](image37.wmf)",
-        "![](image38.wmf)",
-        "![](image39.wmf)"
+        "![](media/image37.png)",
+        "![](media/image38.png)",
+        "![](media/image39.png)"
       ],
       "correct": 0
     }
