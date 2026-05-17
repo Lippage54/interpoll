@@ -9,6 +9,7 @@
     "title": "Строительные материалы",
     "file": "tests/stroimat.json"
   },
+  {
     "id": "sopromat",
     "title": "Сопромат",
     "file": "tests/sopromat.json"
