@@ -259,6 +259,8 @@ h1 {
 const params = new URLSearchParams(window.location.search);
 const testId = params.get('id');
 let questionCount = parseInt(params.get('count')) || 10;
+let originalQuestions = [];
+
 
 const progressKey = `progress_${testId}`;
 const historyKey = `history_${testId}`;
@@ -280,6 +282,7 @@ fetch('tests.json')
   .then(r => r.json())
   .then(data => {
     testData = data;
+    originalQuestions = data.questions;
 
     document.getElementById('title').textContent = data.title;
 
@@ -568,13 +571,13 @@ function saveProgress() {
 
 function resetProgress() {
 
-  if (!confirm("Вы точно хотите сбросить прогресс?")) {
-    return;
-  }
+  if (!confirm("Вы точно хотите сбросить прогресс?")) return;
 
   localStorage.removeItem(progressKey);
 
-  questions = questions
+  const selected = pickRandom(originalQuestions, questionCount);
+
+  questions = selected
     .sort(() => Math.random() - 0.5)
     .map(q => {
 
@@ -582,25 +585,19 @@ function resetProgress() {
         .map((_, i) => i)
         .sort(() => Math.random() - 0.5);
 
-      const shuffledAnswers =
-        order.map(i => q.answers[i]);
-
-      const newCorrect =
-        order.indexOf(q.correct);
+      const shuffledAnswers = order.map(i => q.answers[i]);
 
       return {
         ...q,
         answers: shuffledAnswers,
-        correct: newCorrect
+        correct: order.indexOf(q.correct)
       };
     });
 
   userAnswers = Array(questions.length).fill(null);
-
   currentIndex = 0;
 
   createTiles();
-
   showQuestion(currentIndex);
 }
 

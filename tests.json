@@ -5,6 +5,11 @@
     "file": "tests/hydro.json"
   },
     {
+    "id": "history",
+    "title": "История",
+    "file": "tests/history.json"
+  },
+    {
     "id": "stroimat",
     "title": "Строительные материалы",
     "file": "tests/stroimat.json"
