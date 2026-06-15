@@ -5,9 +5,9 @@
     "file": "tests/hydro.json"
   },
     {
-    "id": "history",
-    "title": "История",
-    "file": "tests/history.json"
+    "id": "geo",
+    "title": "География",
+    "file": "tests/geo.json"
   },
     {
     "id": "stroimat",
